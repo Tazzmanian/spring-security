@@ -1,1 +1,40 @@
 services:
+  postgres:
+    container_name: postgresDB
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=eazybank'
+      - 'POSTGRES_PASSWORD=root'
+      - 'POSTGRES_USER=root'
+      - 'PGDATA=/var/lib/postgresql/data/pgdata'
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdataSec:/var/lib/postgresql/data
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: pgadmin-security
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@abv.bg}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadminSec:/var/lib/pgadmin
+    networks:
+      - postgres
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+volumes:
+  pgdataSec:
+  pgadminSec:
+
+networks:
+  postgres:
+    driver: bridge
