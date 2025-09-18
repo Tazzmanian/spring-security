@@ -22,6 +22,7 @@ public class SecurityProdConfig {
                         .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
                         .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.formLogin(Customizer.withDefaults());
+        http.redirectToHttps(Customizer.withDefaults()); // HTTPS ONLY
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
@@ -45,15 +46,6 @@ public class SecurityProdConfig {
     ///                           |Security|                                 |User Detail|   |Password|
     ///                           |Context |                                 |  Service  |   |Encoder |
     ///                           |--------|                                 |-----------|   |--------|
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withUsername("user").password("{noop}EazyBytes@12345").authorities("read").build();
-//        UserDetails admin = User.withUsername("admin")
-//                .password("{bcrypt}$2a$12$88.f6upbBvy0okEa7OfHFuorV29qeK.sVbB9VQ6J6dWM1bW6Qef8m")
-//                .authorities("admin").build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

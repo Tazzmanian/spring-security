@@ -17,11 +17,14 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrfConfig -> csrfConfig.disable())
+        http
+                .sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession").maximumSessions(3).maxSessionsPreventsLogin(true))
+                .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
                         .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.formLogin(Customizer.withDefaults());
+//        http.redirectToHttps(Customizer.withDefaults()); // HTTP ONLY
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
