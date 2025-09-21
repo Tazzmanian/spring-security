@@ -10,6 +10,9 @@
 INSERT INTO customer (name,email,mobile_number, pwd, role,create_dt)
  VALUES ('Happy','happy@example.com','5334122365', '{bcrypt}$2a$12$88.f6upbBvy0okEa7OfHFuorV29qeK.sVbB9VQ6J6dWM1bW6Qef8m', 'admin',current_date);
 
+INSERT INTO customer (name,email,mobile_number, pwd, role,create_dt)
+ VALUES ('Role1','role1@example.com','5334122365', '{bcrypt}$2a$12$88.f6upbBvy0okEa7OfHFuorV29qeK.sVbB9VQ6J6dWM1bW6Qef8m', '1',current_date);
+
 INSERT INTO accounts (customer_id, account_number, account_type, branch_address, create_dt)
  VALUES (1, 1865764534, 'Savings', '123 Main Street, New York', current_date);
 
@@ -78,3 +81,26 @@ current_date - INTERVAL '30 DAY', current_date + INTERVAL '30 DAY', current_date
 INSERT INTO notice_details ( notice_summary, notice_details, notic_beg_dt, notic_end_dt, create_dt, update_dt)
 VALUES ('COVID-19 Insurance', 'EazyBank launched an insurance policy which will cover COVID-19 expenses. Please reach out to the branch for more details',
 current_date - INTERVAL '30 DAY', current_date + INTERVAL '30 DAY', current_date, null);
+
+INSERT INTO authorities (customer_id, name)
+ VALUES (1, 'VIEWACCOUNT');
+
+INSERT INTO authorities (customer_id, name)
+ VALUES (1, 'VIEWCARDS');
+
+ INSERT INTO authorities (customer_id, name)
+  VALUES (1, 'VIEWLOANS');
+
+ INSERT INTO authorities (customer_id, name)
+   VALUES (1, 'VIEWBALANCE');
+
+--DELETE FROM authorities;
+
+INSERT INTO authorities (customer_id, name)
+  VALUES (1, 'ROLE_USER');
+
+INSERT INTO authorities (customer_id, name)
+  VALUES (1, 'ROLE_ADMIN');
+
+INSERT INTO authorities (customer_id, name)
+  VALUES (2, 'ROLE_1');
