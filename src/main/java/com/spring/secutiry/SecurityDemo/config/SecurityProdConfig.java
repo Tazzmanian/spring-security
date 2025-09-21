@@ -2,7 +2,10 @@ package com.spring.secutiry.SecurityDemo.config;
 
 import com.spring.secutiry.SecurityDemo.exceptionhanling.CustomAccessDeniedHandler;
 import com.spring.secutiry.SecurityDemo.exceptionhanling.CustomBasicAuthenticationEntryPoint;
+import com.spring.secutiry.SecurityDemo.filter.AuthoritiesLoggingAfterFilter;
+import com.spring.secutiry.SecurityDemo.filter.AuthoritiesLoggingAtFilter;
 import com.spring.secutiry.SecurityDemo.filter.CsrfCookieFilter;
+import com.spring.secutiry.SecurityDemo.filter.RequestValidationBeforeFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +52,9 @@ public class SecurityProdConfig {
                         .ignoringRequestMatchers( "/contact","/register")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount").hasRole("USER")
                         .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
