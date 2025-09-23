@@ -15,7 +15,7 @@ public class Contact {
 
     @Id
     @Column(name = "contact_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+//    @GeneratedValue(strategy = GenerationType.UUID)
     private String contactId;
 
     @Column(name = "contact_name")

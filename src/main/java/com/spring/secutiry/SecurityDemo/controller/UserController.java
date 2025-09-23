@@ -1,6 +1,6 @@
 package com.spring.secutiry.SecurityDemo.controller;
 
-import com.spring.secutiry.SecurityDemo.ApplicationConstants;
+import com.spring.secutiry.SecurityDemo.constants.ApplicationConstants;
 import com.spring.secutiry.SecurityDemo.model.Customer;
 import com.spring.secutiry.SecurityDemo.model.LoginRequestDTO;
 import com.spring.secutiry.SecurityDemo.model.LoginResponseDTO;

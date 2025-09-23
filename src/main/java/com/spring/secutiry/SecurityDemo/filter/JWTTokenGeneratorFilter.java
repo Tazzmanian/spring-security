@@ -1,6 +1,6 @@
 package com.spring.secutiry.SecurityDemo.filter;
 
-import com.spring.secutiry.SecurityDemo.ApplicationConstants;
+import com.spring.secutiry.SecurityDemo.constants.ApplicationConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;

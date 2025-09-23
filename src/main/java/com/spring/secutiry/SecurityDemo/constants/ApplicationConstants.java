@@ -1,4 +1,4 @@
-package com.spring.secutiry.SecurityDemo;
+package com.spring.secutiry.SecurityDemo.constants;
 
 public interface ApplicationConstants {
     String JWT_SECRET_KEY = "JWT_SECRET";
